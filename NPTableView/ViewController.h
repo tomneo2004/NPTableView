@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShoppingItem.h"
+#import "NPTableView.h"
+#import "ShoppingItemCell.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<NPTableViewDataSource>
 
 
 @end

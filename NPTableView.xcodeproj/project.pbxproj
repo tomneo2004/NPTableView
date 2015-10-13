@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE6BDCD21BCCA9D4009183E8 /* ShoppingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BDCD11BCCA9D4009183E8 /* ShoppingItem.m */; settings = {ASSET_TAGS = (); }; };
+		CE6BDCD51BCCAE03009183E8 /* ShoppingItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BDCD41BCCAE03009183E8 /* ShoppingItemCell.m */; settings = {ASSET_TAGS = (); }; };
+		CE6BDCD71BCCEF4A009183E8 /* ShoppingItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6BDCD61BCCEF4A009183E8 /* ShoppingItemCell.xib */; settings = {ASSET_TAGS = (); }; };
+		CE6BDCD91BCD05B1009183E8 /* NPTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6BDCD81BCD05B1009183E8 /* NPTableCellView.xib */; settings = {ASSET_TAGS = (); }; };
 		CE7CCF231BCB905E002A0A50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF221BCB905E002A0A50 /* main.m */; };
 		CE7CCF261BCB905E002A0A50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF251BCB905E002A0A50 /* AppDelegate.m */; };
 		CE7CCF291BCB905E002A0A50 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF281BCB905E002A0A50 /* ViewController.m */; };
@@ -15,6 +19,8 @@
 		CE7CCF311BCB905E002A0A50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7CCF2F1BCB905E002A0A50 /* LaunchScreen.storyboard */; };
 		CE7CCF3C1BCB905E002A0A50 /* NPTableViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF3B1BCB905E002A0A50 /* NPTableViewTests.m */; };
 		CE7CCF471BCB905E002A0A50 /* NPTableViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF461BCB905E002A0A50 /* NPTableViewUITests.m */; };
+		CE7CCF571BCB90AF002A0A50 /* NPTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF561BCB90AF002A0A50 /* NPTableView.m */; settings = {ASSET_TAGS = (); }; };
+		CE7CCF5E1BCB9787002A0A50 /* NPTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF5D1BCB9787002A0A50 /* NPTableCellView.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE6BDCD01BCCA9D4009183E8 /* ShoppingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingItem.h; sourceTree = "<group>"; };
+		CE6BDCD11BCCA9D4009183E8 /* ShoppingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingItem.m; sourceTree = "<group>"; };
+		CE6BDCD31BCCAE03009183E8 /* ShoppingItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingItemCell.h; sourceTree = "<group>"; };
+		CE6BDCD41BCCAE03009183E8 /* ShoppingItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingItemCell.m; sourceTree = "<group>"; };
+		CE6BDCD61BCCEF4A009183E8 /* ShoppingItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingItemCell.xib; sourceTree = "<group>"; };
+		CE6BDCD81BCD05B1009183E8 /* NPTableCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NPTableCellView.xib; sourceTree = "<group>"; };
 		CE7CCF1E1BCB905E002A0A50 /* NPTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NPTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7CCF221BCB905E002A0A50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE7CCF241BCB905E002A0A50 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +63,10 @@
 		CE7CCF421BCB905E002A0A50 /* NPTableViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NPTableViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7CCF461BCB905E002A0A50 /* NPTableViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NPTableViewUITests.m; sourceTree = "<group>"; };
 		CE7CCF481BCB905E002A0A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE7CCF551BCB90AF002A0A50 /* NPTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTableView.h; sourceTree = "<group>"; };
+		CE7CCF561BCB90AF002A0A50 /* NPTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTableView.m; sourceTree = "<group>"; };
+		CE7CCF5C1BCB9787002A0A50 /* NPTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTableCellView.h; sourceTree = "<group>"; };
+		CE7CCF5D1BCB9787002A0A50 /* NPTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTableCellView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +117,16 @@
 		CE7CCF201BCB905E002A0A50 /* NPTableView */ = {
 			isa = PBXGroup;
 			children = (
+				CE7CCF541BCB9090002A0A50 /* NPTabelView */,
 				CE7CCF241BCB905E002A0A50 /* AppDelegate.h */,
 				CE7CCF251BCB905E002A0A50 /* AppDelegate.m */,
 				CE7CCF271BCB905E002A0A50 /* ViewController.h */,
 				CE7CCF281BCB905E002A0A50 /* ViewController.m */,
+				CE6BDCD31BCCAE03009183E8 /* ShoppingItemCell.h */,
+				CE6BDCD41BCCAE03009183E8 /* ShoppingItemCell.m */,
+				CE6BDCD61BCCEF4A009183E8 /* ShoppingItemCell.xib */,
+				CE6BDCD01BCCA9D4009183E8 /* ShoppingItem.h */,
+				CE6BDCD11BCCA9D4009183E8 /* ShoppingItem.m */,
 				CE7CCF2A1BCB905E002A0A50 /* Main.storyboard */,
 				CE7CCF2D1BCB905E002A0A50 /* Assets.xcassets */,
 				CE7CCF2F1BCB905E002A0A50 /* LaunchScreen.storyboard */,
@@ -138,6 +160,18 @@
 				CE7CCF481BCB905E002A0A50 /* Info.plist */,
 			);
 			path = NPTableViewUITests;
+			sourceTree = "<group>";
+		};
+		CE7CCF541BCB9090002A0A50 /* NPTabelView */ = {
+			isa = PBXGroup;
+			children = (
+				CE7CCF551BCB90AF002A0A50 /* NPTableView.h */,
+				CE7CCF561BCB90AF002A0A50 /* NPTableView.m */,
+				CE7CCF5C1BCB9787002A0A50 /* NPTableCellView.h */,
+				CE7CCF5D1BCB9787002A0A50 /* NPTableCellView.m */,
+				CE6BDCD81BCD05B1009183E8 /* NPTableCellView.xib */,
+			);
+			name = NPTabelView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +277,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE6BDCD91BCD05B1009183E8 /* NPTableCellView.xib in Resources */,
+				CE6BDCD71BCCEF4A009183E8 /* ShoppingItemCell.xib in Resources */,
 				CE7CCF311BCB905E002A0A50 /* LaunchScreen.storyboard in Resources */,
 				CE7CCF2E1BCB905E002A0A50 /* Assets.xcassets in Resources */,
 				CE7CCF2C1BCB905E002A0A50 /* Main.storyboard in Resources */,
@@ -271,8 +307,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7CCF291BCB905E002A0A50 /* ViewController.m in Sources */,
+				CE7CCF571BCB90AF002A0A50 /* NPTableView.m in Sources */,
 				CE7CCF261BCB905E002A0A50 /* AppDelegate.m in Sources */,
+				CE6BDCD51BCCAE03009183E8 /* ShoppingItemCell.m in Sources */,
 				CE7CCF231BCB905E002A0A50 /* main.m in Sources */,
+				CE6BDCD21BCCA9D4009183E8 /* ShoppingItem.m in Sources */,
+				CE7CCF5E1BCB9787002A0A50 /* NPTableCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +538,7 @@
 				CE7CCF4D1BCB905E002A0A50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE7CCF4E1BCB905E002A0A50 /* Build configuration list for PBXNativeTarget "NPTableViewTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +547,7 @@
 				CE7CCF501BCB905E002A0A50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE7CCF511BCB905E002A0A50 /* Build configuration list for PBXNativeTarget "NPTableViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +556,7 @@
 				CE7CCF531BCB905E002A0A50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
