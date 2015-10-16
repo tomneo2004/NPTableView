@@ -12,5 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *itemNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemQantityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *completeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *deleteLabel;
 
 @end

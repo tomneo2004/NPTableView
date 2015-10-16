@@ -23,21 +23,41 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0O-gS-1yS" userLabel="Label-Complete">
+                    <rect key="frame" x="-119.5" y="0.5" width="119.5" height="60"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enh-oY-NY2" userLabel="Label-Delete">
+                    <rect key="frame" x="600" y="0.0" width="119.5" height="60"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="0TI-y8-gYM" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.4" constant="1" id="1np-Io-iks"/>
                 <constraint firstItem="OpW-ej-OvR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2Ma-DB-Ivm"/>
+                <constraint firstItem="r0O-gS-1yS" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="leading" id="5oO-be-4I1"/>
+                <constraint firstItem="r0O-gS-1yS" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="9Pz-Hp-e49"/>
                 <constraint firstItem="OpW-ej-OvR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="CZg-r5-5SM"/>
+                <constraint firstItem="enh-oY-NY2" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="D6H-yR-HFN"/>
                 <constraint firstItem="OpW-ej-OvR" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.6" constant="1" id="MQT-fc-pCy"/>
+                <constraint firstItem="enh-oY-NY2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="trailing" id="OaE-w5-1fD"/>
                 <constraint firstAttribute="bottom" secondItem="OpW-ej-OvR" secondAttribute="bottom" id="ccl-WQ-QbY"/>
+                <constraint firstItem="enh-oY-NY2" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="s21-hh-H6U"/>
                 <constraint firstItem="0TI-y8-gYM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vSn-8R-CIb"/>
+                <constraint firstItem="r0O-gS-1yS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wwM-Kh-kaf"/>
                 <constraint firstAttribute="bottom" secondItem="0TI-y8-gYM" secondAttribute="bottom" id="zSA-vo-dVl"/>
                 <constraint firstAttribute="trailing" secondItem="0TI-y8-gYM" secondAttribute="trailing" id="zwP-f8-bz9"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="completeLabel" destination="r0O-gS-1yS" id="iKz-Pi-8aA"/>
+                <outlet property="deleteLabel" destination="enh-oY-NY2" id="7xt-vk-GXR"/>
                 <outlet property="itemNameLabel" destination="OpW-ej-OvR" id="Odk-Rd-xZF"/>
                 <outlet property="itemQantityLabel" destination="0TI-y8-gYM" id="CMA-b6-vKS"/>
             </connections>

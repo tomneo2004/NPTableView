@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "PanLeftRight.h"
 
 
 @interface ViewController ()
@@ -48,6 +49,45 @@
     [shoppingItems addObject:[ShoppingItem shoppingItemWithName:@"Man" AndQantity:19]];
     
     _tableView.dataSourceDelegate = self;
+   
+    //add PanDeleteComplete gesture component
+    PanLeftRight *panLRCom = [[PanLeftRight alloc] initWithTableView:_tableView WithPriority:0];
+    panLRCom.panRightSnapBackAnim = YES;
+    panLRCom.panLeftSnapBackAnim = YES;
+    panLRCom.delegate = self;
+    [_tableView addGestureComponent:panLRCom];
+}
+
+- (void)onPanningLeftWithDelta:(CGFloat)delta AtCellIndex:(NSInteger)index{
+    
+    ShoppingItemCell *cell = (ShoppingItemCell *)[_tableView findCellInVisibleCellsByIndex:index];
+    
+    cell.deleteLabel.alpha = delta;
+    
+    if(delta >= 1){
+        
+        cell.deleteLabel.textColor = [UIColor redColor];
+    }
+    else{
+        
+        cell.deleteLabel.textColor = [UIColor whiteColor];
+    }
+}
+
+- (void)onPanningRightWithDelta:(CGFloat)delta AtCellIndex:(NSInteger)index{
+    
+    ShoppingItemCell *cell = (ShoppingItemCell *)[_tableView findCellInVisibleCellsByIndex:index];
+    
+    cell.completeLabel.alpha = delta;
+    
+    if(delta >= 1){
+        
+        cell.completeLabel.textColor = [UIColor greenColor];
+    }
+    else{
+        
+        cell.completeLabel.textColor = [UIColor whiteColor];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,9 +100,9 @@
     return shoppingItems.count;
 }
 
-- (NPTableCellView *)cellForRow:(NSInteger)row{
+- (NPTableCellView *)tableView:(NPTableView *)tableView cellForRow:(NSInteger)row{
     
-    ShoppingItemCell *cell = (ShoppingItemCell *)[_tableView dequeueReusableCell];
+    ShoppingItemCell *cell = (ShoppingItemCell *)[tableView dequeueReusableCell];
     
     if(cell == nil){
         

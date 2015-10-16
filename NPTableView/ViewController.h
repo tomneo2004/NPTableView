@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PanLeftRight.h"
 #import "ShoppingItem.h"
 #import "NPTableView.h"
 #import "ShoppingItemCell.h"
 
-@interface ViewController : UIViewController<NPTableViewDataSource>
+@interface ViewController : UIViewController<NPTableViewDataSource, PanLeftRightDelegate>
 
 
 @end

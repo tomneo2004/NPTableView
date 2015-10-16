@@ -8,6 +8,7 @@
 
 #import "NPTableView.h"
 #import "NPTableCellView.h"
+#import "GestureComponent.h"
 
 @implementation NPTableView{
     
@@ -34,6 +35,9 @@
     
     //cell height
     CGFloat _defaultCellHeight;
+    
+    //hold all gesture components
+    NSMutableArray *_gestureComponents;
 }
 
 @synthesize dataSourceDelegate = _dataSourceDelegate;
@@ -63,11 +67,16 @@
             //init uiscrollView delegate listeners
             _uiscrollViewDelegateListener = [[NSMutableSet alloc] init];
             
+            //init gesture components array
+            _gestureComponents = [[NSMutableArray alloc] init];
+            
             //make sure tableView refresh in the beginning
             _shouldRefreshView = YES;
             
             //make sure we set default cell height at first time
             _shouldSetDefaultCellHeight = YES;
+            
+            [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
         }
     
     return self;
@@ -161,6 +170,11 @@
     return _scrollView;
 }
 
+- (NSArray *)getGestureComponents{
+    
+    return _gestureComponents;
+}
+
 #pragma mark - public interface
 - (void)addListenerForScrollViewDelegate:(id<UIScrollViewDelegate>)listener{
     
@@ -170,6 +184,139 @@
 - (void)removeListenerForScrollViewDelegate:(id<UIScrollViewDelegate>)listener{
     
     [_uiscrollViewDelegateListener removeObject:listener];
+}
+
+- (void)addGestureComponent:(GestureComponent *)component{
+    
+    if(component == nil){
+        
+        NSLog(@"Add component can not be nil");
+        return;
+    }
+    
+    BOOL exist = NO;
+    
+    for(GestureComponent *c in _gestureComponents){
+        
+        if([c isKindOfClass:[component class]]){
+            
+            exist = YES;
+            break;
+        }
+    }
+    
+    if(exist){
+        
+        NSLog(@"Component you add is already exist");
+        return;
+    }
+    
+    [_gestureComponents addObject:component];
+    
+    NSArray *sortedComponents;
+    
+    sortedComponents = [_gestureComponents sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
+    
+        GestureComponent *c1 = obj1;
+        GestureComponent *c2 = obj2;
+        
+        NSInteger result = c2.priority - c1.priority;
+        
+        if(result > 0){
+            
+            return NSOrderedAscending;
+        }
+        else if(result < 0){
+            
+            return NSOrderedDescending;
+        }
+        else{
+            
+            return NSOrderedSame;
+        }
+    }];
+    
+    _gestureComponents = [[NSMutableArray alloc] initWithArray:sortedComponents];
+}
+
+- (void)removeGestureComponent:(GestureComponent *)component{
+    
+    if(component == nil)
+        return;
+    
+    //remove gesture
+    [_scrollView removeGestureRecognizer:component.gestureRecognizer];
+    
+    //remove component
+    [_gestureComponents removeObject:component];
+}
+
+- (void)removeGestureComponentByClass:(Class)componentClass{
+    
+    GestureComponent *removedComponent;
+    
+    //go through gesture components and find it
+    for(GestureComponent *component in _gestureComponents){
+        
+        if([component isKindOfClass:componentClass]){
+            
+            removedComponent = component;
+            
+            break;
+        }
+    }
+    
+    //remove it
+    [self removeGestureComponent:removedComponent];
+}
+
+- (id)findGestureComponentByClass:(Class)componentClass{
+    
+    //go through gesture components and find it
+    for(GestureComponent *component in _gestureComponents){
+        
+        if([component isKindOfClass:componentClass]){
+            
+            return component;
+        }
+    }
+    
+    return nil;
+}
+
+- (NPTableCellView *)findCellByPoint:(CGPoint)point{
+    
+    CGPoint adjustPoint = CGPointMake(point.x, _scrollView.contentOffset.y + point.y);
+    
+    for(NPTableCellView *go in _visibleCells){
+        
+        if(CGRectContainsPoint(go.frame, adjustPoint)){
+            
+            return go;
+        }
+    }
+    
+    return nil;
+}
+
+- (NSInteger)findCellIndexByPoint:(CGPoint)point{
+
+    CGPoint adjustPoint = CGPointMake(point.x, _scrollView.contentOffset.y + point.y);
+    
+    return floor(adjustPoint.y / _defaultCellHeight);
+}
+
+- (NPTableCellView *)findCellInVisibleCellsByIndex:(NSInteger)index{
+    
+    for(NPTableCellView *go in _visibleCells){
+        
+        NSInteger cIndex = go.frame.origin.y / _defaultCellHeight;
+        
+        if(cIndex == index)
+            return go;
+    }
+    
+    return nil;
 }
 
 - (NPTableCellView *)dequeueReusableCell{
@@ -231,6 +378,9 @@
 
 - (void)reloadData{
     
+    _shouldRefreshView = YES;
+    _shouldSetDefaultCellHeight = YES;
+    
     //recycle all cell controllers
     NSArray *visibleCells = [_visibleCells allObjects];
     [self recycleCells:visibleCells];
@@ -240,6 +390,11 @@
 }
 
 #pragma mark - internal
+- (void)deviceOrientationDidChange:(NSNotification *)notification{
+
+    [self reloadData];
+}
+
 - (void)refreshView{
     
     if(CGRectIsNull(_scrollView.frame)){
@@ -286,7 +441,7 @@
         if(!cell){
             
             //ask delegate for cell controller
-            cell = [_dataSourceDelegate cellForRow:row];
+            cell = [_dataSourceDelegate tableView:self cellForRow:row];
             
             //find top edge y positioin for this cell row
             float topEdgeForRow = row * [self cellHeight];
@@ -363,6 +518,130 @@
             if([go respondsToSelector:@selector(scrollViewDidScroll:)]){
                 
                 [go scrollViewDidScroll:scrollView];
+            }
+        }
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    //propagate event to all delegate listener
+    if(_uiscrollViewDelegateListener != nil){
+        
+        for(id<UIScrollViewDelegate> go in _uiscrollViewDelegateListener){
+            
+            if([go respondsToSelector:@selector(scrollViewWillBeginDragging:)]){
+                
+                [go scrollViewWillBeginDragging:scrollView];
+            }
+        }
+    }
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    
+    //propagate event to all delegate listener
+    if(_uiscrollViewDelegateListener != nil){
+        
+        for(id<UIScrollViewDelegate> go in _uiscrollViewDelegateListener){
+            
+            if([go respondsToSelector:@selector(scrollViewWillEndDragging:withVelocity:targetContentOffset:)]){
+                
+                [go scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset];
+            }
+        }
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    //propagate event to all delegate listener
+    if(_uiscrollViewDelegateListener != nil){
+        
+        for(id<UIScrollViewDelegate> go in _uiscrollViewDelegateListener){
+            
+            if([go respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]){
+                
+                [go scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+            }
+        }
+    }
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
+    
+    BOOL scrollToTop = YES;
+    
+    //propagate event to all delegate listener
+    if(_uiscrollViewDelegateListener != nil){
+        
+        for(id<UIScrollViewDelegate> go in _uiscrollViewDelegateListener){
+            
+            if([go respondsToSelector:@selector(scrollViewShouldScrollToTop:)]){
+                
+                scrollToTop = scrollToTop && [go scrollViewShouldScrollToTop:scrollView];
+            }
+        }
+    }
+    
+    return scrollToTop;
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
+    
+    //propagate event to all delegate listener
+    if(_uiscrollViewDelegateListener != nil){
+        
+        for(id<UIScrollViewDelegate> go in _uiscrollViewDelegateListener){
+            
+            if([go respondsToSelector:@selector(scrollViewDidScrollToTop:)]){
+                
+                [go scrollViewDidScrollToTop:scrollView];
+            }
+        }
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    
+    //propagate event to all delegate listener
+    if(_uiscrollViewDelegateListener != nil){
+        
+        for(id<UIScrollViewDelegate> go in _uiscrollViewDelegateListener){
+            
+            if([go respondsToSelector:@selector(scrollViewWillBeginDecelerating:)]){
+                
+                [go scrollViewWillBeginDecelerating:scrollView];
+            }
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    //propagate event to all delegate listener
+    if(_uiscrollViewDelegateListener != nil){
+        
+        for(id<UIScrollViewDelegate> go in _uiscrollViewDelegateListener){
+            
+            if([go respondsToSelector:@selector(scrollViewDidEndDecelerating:)]){
+                
+                [go scrollViewDidEndDecelerating:scrollView];
+            }
+        }
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    
+    //propagate event to all delegate listener
+    if(_uiscrollViewDelegateListener != nil){
+        
+        for(id<UIScrollViewDelegate> go in _uiscrollViewDelegateListener){
+            
+            if([go respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)]){
+                
+                [go scrollViewDidEndScrollingAnimation:scrollView];
             }
         }
     }

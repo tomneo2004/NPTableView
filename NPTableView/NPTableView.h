@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class GestureComponent;
+@class NPTableView;
 @class NPTableCellView;
 
 @protocol NPTableViewDataSource <NSObject>
@@ -21,7 +23,7 @@
 /**
  * Cell controller for specific row
  */
-- (NPTableCellView *)cellForRow:(NSInteger)row;
+- (NPTableCellView *)tableView:(NPTableView *)tableView cellForRow:(NSInteger)row;
 
 /**
  * Cell's class.
@@ -34,7 +36,9 @@
 
 @optional
 /**
- * Height of cell, if not override then layout cell height will be default
+ * Height of cell, if not override then layout cell height of xib file will be default
+ * If you override and return height value then your value will be used instead of
+ * default height
  */
 - (CGFloat)cellHeight;
 
@@ -77,6 +81,11 @@
 @property (getter=getScrollView, nonatomic) UIScrollView *scrollView;
 
 /**
+ * All gesture components
+ */
+@property (getter=getGestureComponents, nonatomic) NSArray *gestureComponents;
+
+/**
  * Dequeue reusable/recycled cell controller.
  * Return nil if there is no resuable/recycled cell controller
  */
@@ -97,8 +106,52 @@
  */
 - (void)reloadData;
 
+/**
+ * Add listener and listen UIScrollViewDelegate event
+ * If you add listener then you are responsible to remove
+ * when no longer want to listen event
+ */
 - (void)addListenerForScrollViewDelegate:(id<UIScrollViewDelegate>)listener;
 
+/**
+ * Remove listener for UIScrollViewDelegate event
+ */
 - (void)removeListenerForScrollViewDelegate:(id<UIScrollViewDelegate>)listener;
+
+/**
+ * Add gesture component
+ */
+- (void)addGestureComponent:(GestureComponent *)component;
+
+/**
+ * Remove gesture component
+ */
+- (void)removeGestureComponent:(GestureComponent *)component;
+
+/**
+ * Remove gesture component by class
+ */
+- (void)removeGestureComponentByClass:(Class)componentClass;
+
+/**
+ * Find gesture Component by class
+ */
+- (id)findGestureComponentByClass:(Class)componentClass;
+
+/**
+ * Find index of cell by point x,y
+ */
+- (NSInteger)findCellIndexByPoint:(CGPoint)point;
+
+/**
+ * Find cell by point x,y
+ * Point must be in the tableView's scrollView coordinate
+ */
+- (NPTableCellView *)findCellByPoint:(CGPoint)point;
+
+/**
+ * Find cell by cell index
+ */
+- (NPTableCellView *)findCellInVisibleCellsByIndex:(NSInteger)index;
 
 @end

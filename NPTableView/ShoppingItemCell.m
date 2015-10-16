@@ -16,6 +16,15 @@
 
 @synthesize itemNameLabel = _itemNameLabel;
 @synthesize itemQantityLabel = _itemQantityLabel;
+@synthesize completeLabel = _completeLabel;
+@synthesize deleteLabel = _deleteLabel;
 
+- (void)layoutSubviews{
+    
+    [super layoutSubviews];
+    
+    _completeLabel.text = @"\u2713";
+    _deleteLabel.text = @"\u2717";
+}
 
 @end
