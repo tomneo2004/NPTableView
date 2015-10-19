@@ -12,7 +12,12 @@
 
 @end
 
-@implementation NPTableCellView
+@implementation NPTableCellView{
+    
+    UIView *_selectedBackgroundView;
+}
+
+@synthesize selectBackgroundView = _selectBackgroundView;
 
 - (id)initWithNibName:(NSString *)nibName{
     
@@ -35,6 +40,91 @@
     }
     
     return self;
+}
+
+- (void)setSelect:(BOOL)selected{
+    
+    if(selected){
+        
+        //if there is a selectBackgroundView assigned, we need to perform highlight animation
+        if(_selectedBackgroundView != nil){
+            
+            _selectedBackgroundView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+            [self insertSubview:_selectedBackgroundView atIndex:0];
+            
+            [self beginHighlight:selected];
+        }
+        else{
+            
+            [self setHighlight:selected];
+        }
+    }
+    else{
+        
+        //if there is a selectBackgroundView assigned, we need to perform unhighlight animation
+        if(_selectedBackgroundView != nil){
+            
+            [self beginHighlight:selected];
+        }
+        else{
+            
+            [self setHighlight:selected];
+        }
+    }
+}
+
+- (void)beginHighlight:(BOOL)highlighted{
+    
+    if(highlighted){
+        
+        _selectedBackgroundView.alpha = 0.0f;
+        
+
+        [UIView animateWithDuration:0.5f animations:^{
+            
+            _selectedBackgroundView.alpha = 1.0f;
+            
+        } completion:^(BOOL finished){
+        
+            [self setHighlight:YES];
+        }];
+    }
+    else{
+        
+
+        [UIView animateWithDuration:0.5f animations:^{
+        
+            _selectedBackgroundView.alpha = 0.0f;
+            
+        } completion:^(BOOL finished){
+        
+            [self setHighlight:NO];
+        }];
+    }
+}
+
+- (void)setHighlight:(BOOL)highlighted{
+    
+    
+}
+
+- (UIView *)selectBackgroundView{
+    
+    return _selectedBackgroundView;
+}
+
+- (void)setSelectBackgroundView:(UIView *)selectBackgroundView{
+    
+    _selectedBackgroundView = selectBackgroundView;
+}
+
+
+- (void)willRecycle{
+    
+}
+
+- (void)didRecycle{
+    
 }
 
 @end

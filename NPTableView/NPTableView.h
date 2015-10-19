@@ -55,6 +55,12 @@
 - (BOOL)tableViewAlwaysBouncesVertical;
 
 /**
+ * Return Yes to enable vertical scroll indicator
+ * Default is Yes
+ */
+- (BOOL)enableVerticalScrollIndicator;
+
+/**
  * TableView's background color, default is white
  * If this view is first layer of application then return
  * clear color might not work as expect
@@ -140,6 +146,7 @@
 
 /**
  * Find index of cell by point x,y
+ * Point must be in the tableView's scrollView coordinate
  */
 - (NSInteger)findCellIndexByPoint:(CGPoint)point;
 

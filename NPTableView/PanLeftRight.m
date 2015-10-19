@@ -55,11 +55,12 @@
         return NO;
 }
 
+#pragma mark - internal
 - (void)onPan:(UIPanGestureRecognizer *)recognizer{
     
     if(recognizer.state == UIGestureRecognizerStateBegan){
         
-        CGPoint touchPoint = [recognizer locationOfTouch:0 inView:_tableView];
+        CGPoint touchPoint = [recognizer locationOfTouch:0 inView:_tableView.scrollView];
         
         //find which we are going to work on
         _tempCell = [_tableView findCellByPoint:touchPoint];

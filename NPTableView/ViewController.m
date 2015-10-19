@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "PanLeftRight.h"
 
 
 @interface ViewController ()
@@ -56,8 +55,20 @@
     panLRCom.panLeftSnapBackAnim = YES;
     panLRCom.delegate = self;
     [_tableView addGestureComponent:panLRCom];
+    
+    //add tap gesture component
+    Tap *tap = [[Tap alloc] initWithTableView:_tableView WithPriority:0];
+    tap.delegate = self;
+    [_tableView addGestureComponent:tap];
+    
+    //add double tap gesture component
+    DoubleTap *doubleTap = [[DoubleTap alloc] initWithTableView:_tableView WithPriority:0];
+    doubleTap.delegate = self;
+    [_tableView addGestureComponent:doubleTap];
+    
 }
 
+//handle panning left
 - (void)onPanningLeftWithDelta:(CGFloat)delta AtCellIndex:(NSInteger)index{
     
     ShoppingItemCell *cell = (ShoppingItemCell *)[_tableView findCellInVisibleCellsByIndex:index];
@@ -74,6 +85,7 @@
     }
 }
 
+//handle panning right
 - (void)onPanningRightWithDelta:(CGFloat)delta AtCellIndex:(NSInteger)index{
     
     ShoppingItemCell *cell = (ShoppingItemCell *)[_tableView findCellInVisibleCellsByIndex:index];
@@ -88,6 +100,16 @@
         
         cell.completeLabel.textColor = [UIColor whiteColor];
     }
+}
+
+- (void)onTapAtCellIndex:(NSInteger)index{
+    
+    NSLog(@"Tap on cell at index: %li", index);
+}
+
+- (void)onDoubleTapAtCellIndex:(NSInteger)index{
+    
+    NSLog(@"Double tap on cell at index: %li", index);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,6 +129,11 @@
     if(cell == nil){
         
         cell = [[ShoppingItemCell alloc] initWithNibName:@"ShoppingItemCell"];
+        
+        //give a select background
+        UIView *bgView = [[UIView alloc] init];
+        bgView.backgroundColor = [UIColor yellowColor];
+        cell.selectBackgroundView = bgView;
     }
     
     ShoppingItem *item = [shoppingItems objectAtIndex:row];
@@ -141,6 +168,11 @@
     
     return YES;
     
+}
+
+- (BOOL)enableVerticalScrollIndicator{
+    
+    return YES;
 }
 
 - (UIColor *)tableViewBackgroundColor{

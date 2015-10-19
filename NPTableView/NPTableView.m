@@ -9,6 +9,7 @@
 #import "NPTableView.h"
 #import "NPTableCellView.h"
 #import "GestureComponent.h"
+#import "NPTouchDownUp.h"
 
 @implementation NPTableView{
     
@@ -38,6 +39,12 @@
     
     //hold all gesture components
     NSMutableArray *_gestureComponents;
+    
+    //temp selected cell
+    __weak NPTableCellView *_tempCell;
+    
+    //used to determine if a cell is touched
+    BOOL _didTouchCell;
 }
 
 @synthesize dataSourceDelegate = _dataSourceDelegate;
@@ -51,6 +58,12 @@
             
             //create scrollView
             _scrollView = [[UIScrollView alloc] initWithFrame:CGRectNull];
+            
+            //add touch down gesture
+            NPTouchDownUp * touchDown = [[NPTouchDownUp alloc] initWithTarget:self action:@selector(onScrollViewTouchDown:) view:_scrollView];
+            [_scrollView addGestureRecognizer:touchDown];
+            
+            _didTouchCell = NO;
             
             //set scrollView delegate
             _scrollView.delegate = self;
@@ -126,6 +139,16 @@
     else{
         
         _scrollView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    //ask delegate for scrollView vertical scroll indicator
+    if([_dataSourceDelegate respondsToSelector:@selector(enableVerticalScrollIndicator)]){
+        
+        _scrollView.showsVerticalScrollIndicator = [_dataSourceDelegate enableVerticalScrollIndicator];
+    }
+    else{
+        
+        _scrollView.showsVerticalScrollIndicator = YES;
     }
     
     //set default cell height
@@ -290,7 +313,9 @@
     
     for(NPTableCellView *go in _visibleCells){
         
-        if(CGRectContainsPoint(go.frame, adjustPoint)){
+        CGRect rect = CGRectMake(go.frame.origin.x, go.frame.origin.y + _scrollView.contentOffset.y, go.frame.size.width, go.frame.size.height);
+        
+        if(CGRectContainsPoint(rect, adjustPoint)){
             
             return go;
         }
@@ -301,9 +326,7 @@
 
 - (NSInteger)findCellIndexByPoint:(CGPoint)point{
 
-    CGPoint adjustPoint = CGPointMake(point.x, _scrollView.contentOffset.y + point.y);
-    
-    return floor(adjustPoint.y / _defaultCellHeight);
+    return floor(point.y / _defaultCellHeight);
 }
 
 - (NPTableCellView *)findCellInVisibleCellsByIndex:(NSInteger)index{
@@ -390,6 +413,53 @@
 }
 
 #pragma mark - internal
+- (void)onScrollViewTouchDown:(NPTouchDownUp *)touchDown{
+    
+    if(touchDown.state == UIGestureRecognizerStateBegan){
+        
+        //give a delay to begin select cell
+        //during this time if user move finger then it should cancel select cell
+        [self performSelector:@selector(beginSelectCellWithTouch:) withObject:touchDown afterDelay:0.03f];
+    }
+    
+    if(touchDown.state == UIGestureRecognizerStateChanged){
+        
+        if(touchDown.touchChanged){
+            
+            //cancel select cell if user finger moved
+            [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        }
+        
+    }
+    
+    if(touchDown.state == UIGestureRecognizerStateEnded){
+        
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        
+        [_tempCell setSelect:NO];
+        
+        _tempCell = nil;
+    }
+    
+    if(touchDown.state == UIGestureRecognizerStateCancelled){
+        
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        
+        [_tempCell setSelect:NO];
+        
+        _tempCell = nil;
+    }
+}
+
+- (void)beginSelectCellWithTouch:(NPTouchDownUp *)touchDown{
+    
+    _didTouchCell = YES;
+    
+    _tempCell = [self findCellByPoint:touchDown.touchDownLocation];
+    
+    [_tempCell setSelect:YES];
+}
+
 - (void)deviceOrientationDidChange:(NSNotification *)notification{
 
     [self reloadData];
@@ -462,19 +532,26 @@
 
 - (void)recycleCell:(NPTableCellView *)cell{
     
+    [cell willRecycle];
+    
     [cell removeFromSuperview];
     
     [_recycledCells addObject:cell];
     [_visibleCells removeObject:cell];
     
+    [cell didRecycle];
 }
 
 - (void)recycleCells:(NSArray *)cells{
+    
+    [cells makeObjectsPerformSelector:@selector(willRecycle)];
     
     [cells makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     [_recycledCells addObjectsFromArray:cells];
     [_visibleCells minusSet:[NSSet setWithArray:cells]];
+    
+    [cells makeObjectsPerformSelector:@selector(didRecycle)];
     
 }
 
@@ -525,6 +602,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
+    
     //propagate event to all delegate listener
     if(_uiscrollViewDelegateListener != nil){
         
@@ -539,6 +617,7 @@
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    
     
     //propagate event to all delegate listener
     if(_uiscrollViewDelegateListener != nil){
@@ -589,6 +668,7 @@
 
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
     
+    
     //propagate event to all delegate listener
     if(_uiscrollViewDelegateListener != nil){
         
@@ -603,6 +683,7 @@
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    
     
     //propagate event to all delegate listener
     if(_uiscrollViewDelegateListener != nil){
@@ -619,6 +700,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
+    
     //propagate event to all delegate listener
     if(_uiscrollViewDelegateListener != nil){
         
@@ -633,6 +715,7 @@
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    
     
     //propagate event to all delegate listener
     if(_uiscrollViewDelegateListener != nil){
