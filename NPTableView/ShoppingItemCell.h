@@ -7,9 +7,11 @@
 //
 
 #import "NPTableCellView.h"
+#import "ShoppingItem.h"
 
 @interface ShoppingItemCell : NPTableCellView
 
+@property (nonatomic) ShoppingItem *item;
 @property (weak, nonatomic) IBOutlet UILabel *itemNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemQantityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *completeLabel;

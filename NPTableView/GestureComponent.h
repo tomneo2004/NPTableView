@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NPTableCellView.h"
 
-@interface GestureComponent : NSObject<UIGestureRecognizerDelegate>{
+@interface GestureComponent : NSObject<UIGestureRecognizerDelegate, UIScrollViewDelegate>{
     
     @protected
     NPTableView *_tableView;

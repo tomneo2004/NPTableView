@@ -56,6 +56,9 @@
     //otherwise move
     //used to setSelect cell and setHighlight cell
     CGFloat _deadzoneRadius;
+    
+    //determine whether tableView can be interacted
+    BOOL _interactionEnable;
 }
 
 @synthesize dataSourceDelegate = _dataSourceDelegate;
@@ -66,6 +69,8 @@
     self = [super initWithCoder:aDecoder];
         
         if(self){
+            
+            _interactionEnable = YES;
             
             //create scrollView
             _scrollView = [[NPScrollView alloc] initWithFrame:CGRectNull];
@@ -169,7 +174,7 @@
         
         //if there is a xib file name match cell's class name then use xib view's height as default
         //otherwise set it to 60
-        if([[NSBundle mainBundle] pathForResource:className ofType:@"xib"]){
+        if([[NSBundle mainBundle] pathForResource:className ofType:@"nib"]){
             
             //get xib file
             NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil];
@@ -202,6 +207,9 @@
  */
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
+    if(!_interactionEnable)
+        return;
+        
     _beganTouchLocation = [[touches anyObject] locationInView:_scrollView];
     
     //give a delay to begin select cell
@@ -213,6 +221,9 @@
  * override touchesMoved to handle whether setSelect cell should happen or not
  */
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    if(!_interactionEnable)
+        return;
     
     CGPoint cTouch = [[touches anyObject] locationInView:_scrollView];
     CGFloat moveDistance = sqrt(pow(cTouch.x-_beganTouchLocation.x, 2)+pow(cTouch.y-_beganTouchLocation.y, 2));
@@ -226,6 +237,9 @@
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
+    if(!_interactionEnable)
+        return;
+    
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
     [_tempCell setSelect:NO];
@@ -234,6 +248,9 @@
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    if(!_interactionEnable)
+        return;
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
@@ -251,6 +268,19 @@
 - (NSArray *)getGestureComponents{
     
     return _gestureComponents;
+}
+
+-(CGFloat)getDefaultRowHeight{
+    
+    return _defaultCellHeight;
+}
+
+#pragma mark - setter
+- (void)setInteractionEnable:(BOOL)interactionEnable{
+    
+    _interactionEnable = interactionEnable;
+    
+    _scrollView.scrollEnabled = _interactionEnable;
 }
 
 #pragma mark - public interface
@@ -465,6 +495,7 @@
     
     //refresh view
     [self refreshView];
+
 }
 
 #pragma mark - internal
@@ -535,6 +566,8 @@
             
             //adjust cell's frame
             cell.frame = CGRectMake(0, topEdgeForRow, _scrollView.bounds.size.width, [self cellHeight]);
+            
+            cell.hidden = NO;
             
             //add to scrollView
             [_scrollView insertSubview:cell atIndex:0];

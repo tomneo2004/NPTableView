@@ -7,7 +7,15 @@
 //
 
 #import "GestureComponent.h"
+#import "PDANCellHolder.h"
 
-@interface PullDownAddNew : GestureComponent
+@protocol PullDownAddNewDelegate <NSObject>
+
+@optional
+- (void)addNewItemWithText:(NSString *)text;
+
+@end
+
+@interface PullDownAddNew : GestureComponent<PDANCellHolderDelegate>
 
 @end

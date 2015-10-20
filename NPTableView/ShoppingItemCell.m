@@ -14,6 +14,7 @@
 
 @implementation ShoppingItemCell
 
+@synthesize item = _item;
 @synthesize itemNameLabel = _itemNameLabel;
 @synthesize itemQantityLabel = _itemQantityLabel;
 @synthesize completeLabel = _completeLabel;

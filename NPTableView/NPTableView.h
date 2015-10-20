@@ -92,6 +92,13 @@
 @property (getter=getGestureComponents, nonatomic) NSArray *gestureComponents;
 
 /**
+ * Default row height
+ */
+@property (getter=getDefaultRowHeight, nonatomic) CGFloat defatultRowHeight;
+
+@property (setter=setInteractionEnable:, nonatomic) BOOL interactionEnable;
+
+/**
  * Dequeue reusable/recycled cell controller.
  * Return nil if there is no resuable/recycled cell controller
  */

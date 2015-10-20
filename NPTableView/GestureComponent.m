@@ -24,6 +24,8 @@
         
         _tableView = tableView;
         _priority = priority;
+        
+        [tableView addListenerForScrollViewDelegate:self];
     }
     
     return self;

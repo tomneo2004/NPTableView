@@ -22,6 +22,12 @@
 
 @synthesize tableView = _tableView;
 
+#pragma mark - override
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -69,8 +75,14 @@
     //single tap happen when double tap fail
     [tap requireGestureComponentToFail:doubleTap];
     
+    //add pull down add new
+    PullDownAddNew *pDAN = [[PullDownAddNew alloc] initWithTableView:_tableView WithPriority:0];
+    pDAN.delegate = self;
+    [_tableView addGestureComponent:pDAN];
+    
 }
 
+#pragma mark - PanleftRight delegate
 //handle panning left
 - (void)onPanningLeftWithDelta:(CGFloat)delta AtCellIndex:(NSInteger)index{
     
@@ -105,21 +117,80 @@
     }
 }
 
+- (void)onPanLeftAtCellIndex:(NSInteger)index{
+    
+    ShoppingItem *deleteItem = [shoppingItems objectAtIndex:index];
+    
+    [shoppingItems removeObjectAtIndex:index];
+    
+    float delay = 0.0;
+    
+    NSArray *visibleCells = [_tableView visibleCells];
+    
+    UIView *lastView = [visibleCells lastObject];
+    
+    BOOL startAnimating  = NO;
+    
+    for(ShoppingItemCell *cell in visibleCells){
+        
+        if (startAnimating) {
+            [UIView animateWithDuration:0.3
+                                  delay:delay
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^{
+                                 cell.frame = CGRectOffset(cell.frame, 0.0f, -cell.frame.size.height);
+                             }
+                             completion:^(BOOL finished){
+                                 if (cell == lastView) {
+                                     [self.tableView reloadData];
+                                 }
+                             }];
+            delay+=0.03;
+        }
+        
+        // if you have reached the item that was deleted, start animating
+        if (cell.item == deleteItem) {
+            startAnimating = true;
+            cell.hidden = YES;
+        }
+    }
+    
+    
+    if(((ShoppingItemCell *)lastView).item == deleteItem){
+        
+        [_tableView reloadData];
+    }
+
+    
+}
+
+- (void)onPanRightAtCellIndex:(NSInteger)index{
+    
+}
+
+#pragma mark - SingleTap delegate
 - (void)onSingleTapAtCellIndex:(NSInteger)index{
     
-    NSLog(@"Tap on cell at index: %li", index);
+    NSLog(@"Tap on cell at index: %li", (long)index);
 }
 
+#pragma mark - DoubleTap delegate
 - (void)onDoubleTapAtCellIndex:(NSInteger)index{
     
-    NSLog(@"Double tap on cell at index: %li", index);
+    NSLog(@"Double tap on cell at index: %li", (long)index);
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - PullDownAddNew delegate
+- (void)addNewItemWithText:(NSString *)text{
+    
+    ShoppingItem *newItem = [ShoppingItem shoppingItemWithName:text AndQantity:0];
+    
+    [shoppingItems insertObject:newItem atIndex:0];
+    
+    [_tableView reloadData];
 }
 
+#pragma mark - NPTableView delegate
 - (NSInteger)numberOfRows{
     
     return shoppingItems.count;
@@ -141,6 +212,7 @@
     
     ShoppingItem *item = [shoppingItems objectAtIndex:row];
     
+    cell.item = item;
     cell.itemNameLabel.text = item.itemName;
     cell.itemQantityLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)item.itemQantity];
     
