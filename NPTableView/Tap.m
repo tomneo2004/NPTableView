@@ -11,6 +11,8 @@
 @implementation Tap{
     
     NSInteger _tappedCellIndex;
+    
+    BOOL _onHold;
 }
 
 #pragma mark - override
@@ -39,7 +41,9 @@
             
             [self.delegate onTapAtCellIndex:_tappedCellIndex];
         }
+         
     }
 }
+
 
 @end

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CE07C9A21BD48AFC001CEC43 /* Tap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07C9A11BD48AFC001CEC43 /* Tap.m */; settings = {ASSET_TAGS = (); }; };
-		CE07C9A81BD49816001CEC43 /* NPTouchDownUp.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07C9A71BD49816001CEC43 /* NPTouchDownUp.m */; settings = {ASSET_TAGS = (); }; };
 		CE07C9AA1BD4E8E4001CEC43 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE07C9A91BD4E8E4001CEC43 /* QuartzCore.framework */; };
 		CE07C9AD1BD4EF38001CEC43 /* DoubleTap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07C9AC1BD4EF38001CEC43 /* DoubleTap.m */; settings = {ASSET_TAGS = (); }; };
 		CE6BDCD21BCCA9D4009183E8 /* ShoppingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BDCD11BCCA9D4009183E8 /* ShoppingItem.m */; settings = {ASSET_TAGS = (); }; };
@@ -25,6 +24,7 @@
 		CE7CCF471BCB905E002A0A50 /* NPTableViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF461BCB905E002A0A50 /* NPTableViewUITests.m */; };
 		CE7CCF571BCB90AF002A0A50 /* NPTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF561BCB90AF002A0A50 /* NPTableView.m */; settings = {ASSET_TAGS = (); }; };
 		CE7CCF5E1BCB9787002A0A50 /* NPTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7CCF5D1BCB9787002A0A50 /* NPTableCellView.m */; settings = {ASSET_TAGS = (); }; };
+		CEBAB5011BD5E7F500B6F589 /* NPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBAB5001BD5E7F500B6F589 /* NPScrollView.m */; settings = {ASSET_TAGS = (); }; };
 		CEC181691BD08CC600768AC9 /* GestureComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC181681BD08CC600768AC9 /* GestureComponent.m */; settings = {ASSET_TAGS = (); }; };
 		CEC1817F1BD0A01700768AC9 /* PanLeftRight.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC1817E1BD0A01700768AC9 /* PanLeftRight.m */; settings = {ASSET_TAGS = (); }; };
 		CEC181821BD1014D00768AC9 /* PullDownAddNew.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC181811BD1014D00768AC9 /* PullDownAddNew.m */; settings = {ASSET_TAGS = (); }; };
@@ -50,8 +50,6 @@
 /* Begin PBXFileReference section */
 		CE07C9A01BD48AFC001CEC43 /* Tap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tap.h; sourceTree = "<group>"; };
 		CE07C9A11BD48AFC001CEC43 /* Tap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tap.m; sourceTree = "<group>"; };
-		CE07C9A61BD49816001CEC43 /* NPTouchDownUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTouchDownUp.h; sourceTree = "<group>"; };
-		CE07C9A71BD49816001CEC43 /* NPTouchDownUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTouchDownUp.m; sourceTree = "<group>"; };
 		CE07C9A91BD4E8E4001CEC43 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE07C9AB1BD4EF38001CEC43 /* DoubleTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleTap.h; sourceTree = "<group>"; };
 		CE07C9AC1BD4EF38001CEC43 /* DoubleTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleTap.m; sourceTree = "<group>"; };
@@ -81,6 +79,8 @@
 		CE7CCF561BCB90AF002A0A50 /* NPTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTableView.m; sourceTree = "<group>"; };
 		CE7CCF5C1BCB9787002A0A50 /* NPTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTableCellView.h; sourceTree = "<group>"; };
 		CE7CCF5D1BCB9787002A0A50 /* NPTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTableCellView.m; sourceTree = "<group>"; };
+		CEBAB4FF1BD5E7F500B6F589 /* NPScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPScrollView.h; sourceTree = "<group>"; };
+		CEBAB5001BD5E7F500B6F589 /* NPScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPScrollView.m; sourceTree = "<group>"; };
 		CEC181671BD08CC600768AC9 /* GestureComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureComponent.h; sourceTree = "<group>"; };
 		CEC181681BD08CC600768AC9 /* GestureComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureComponent.m; sourceTree = "<group>"; };
 		CEC1817D1BD0A01700768AC9 /* PanLeftRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanLeftRight.h; sourceTree = "<group>"; };
@@ -191,6 +191,8 @@
 				CEC181651BD08C8A00768AC9 /* GestureComponent */,
 				CE7CCF551BCB90AF002A0A50 /* NPTableView.h */,
 				CE7CCF561BCB90AF002A0A50 /* NPTableView.m */,
+				CEBAB4FF1BD5E7F500B6F589 /* NPScrollView.h */,
+				CEBAB5001BD5E7F500B6F589 /* NPScrollView.m */,
 				CE7CCF5C1BCB9787002A0A50 /* NPTableCellView.h */,
 				CE7CCF5D1BCB9787002A0A50 /* NPTableCellView.m */,
 				CE6BDCD81BCD05B1009183E8 /* NPTableCellView.xib */,
@@ -203,8 +205,6 @@
 			children = (
 				CEC181671BD08CC600768AC9 /* GestureComponent.h */,
 				CEC181681BD08CC600768AC9 /* GestureComponent.m */,
-				CE07C9A61BD49816001CEC43 /* NPTouchDownUp.h */,
-				CE07C9A71BD49816001CEC43 /* NPTouchDownUp.m */,
 			);
 			name = GestureComponent;
 			sourceTree = "<group>";
@@ -358,8 +358,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE07C9A21BD48AFC001CEC43 /* Tap.m in Sources */,
-				CE07C9A81BD49816001CEC43 /* NPTouchDownUp.m in Sources */,
 				CE7CCF291BCB905E002A0A50 /* ViewController.m in Sources */,
+				CEBAB5011BD5E7F500B6F589 /* NPScrollView.m in Sources */,
 				CE7CCF571BCB90AF002A0A50 /* NPTableView.m in Sources */,
 				CE07C9AD1BD4EF38001CEC43 /* DoubleTap.m in Sources */,
 				CE7CCF261BCB905E002A0A50 /* AppDelegate.m in Sources */,

@@ -9,12 +9,12 @@
 #import "NPTableView.h"
 #import "NPTableCellView.h"
 #import "GestureComponent.h"
-#import "NPTouchDownUp.h"
+#import "NPScrollView.h"
 
 @implementation NPTableView{
     
     //scrollView that is used to render cell
-    UIScrollView *_scrollView;
+    NPScrollView *_scrollView;
     
     //hold all cell controllers that is currently display on scrollView
     NSMutableSet *_visibleCells;
@@ -44,7 +44,18 @@
     __weak NPTableCellView *_tempCell;
     
     //used to determine if a cell is touched
+    //used to setSelect cell and setHighlight cell
     BOOL _didTouchCell;
+    
+    //began of touch location;
+    //used to find out which cell is touched
+    //used to setSelect cell and setHighlight cell
+    CGPoint _beganTouchLocation;
+    
+    //if finger move distance within dead zone it consider not moving
+    //otherwise move
+    //used to setSelect cell and setHighlight cell
+    CGFloat _deadzoneRadius;
 }
 
 @synthesize dataSourceDelegate = _dataSourceDelegate;
@@ -57,11 +68,10 @@
         if(self){
             
             //create scrollView
-            _scrollView = [[UIScrollView alloc] initWithFrame:CGRectNull];
-            
-            //add touch down gesture
-            NPTouchDownUp * touchDown = [[NPTouchDownUp alloc] initWithTarget:self action:@selector(onScrollViewTouchDown:) view:_scrollView];
-            [_scrollView addGestureRecognizer:touchDown];
+            _scrollView = [[NPScrollView alloc] initWithFrame:CGRectNull];
+
+            //setup touch dead zone
+            _deadzoneRadius = 0.5f;
             
             _didTouchCell = NO;
             
@@ -185,6 +195,51 @@
         _shouldRefreshView = NO;
         [self refreshView];
     }
+}
+
+/**
+ * override touchBegan to handle setSelect cell
+ */
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    _beganTouchLocation = [[touches anyObject] locationInView:_scrollView];
+    
+    //give a delay to begin select cell
+    //during this time if user move finger then it should cancel select cell
+    [self performSelector:@selector(beginSelectCellWithTouch) withObject:nil afterDelay:0.01f];
+}
+
+/**
+ * override touchesMoved to handle whether setSelect cell should happen or not
+ */
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    CGPoint cTouch = [[touches anyObject] locationInView:_scrollView];
+    CGFloat moveDistance = sqrt(pow(cTouch.x-_beganTouchLocation.x, 2)+pow(cTouch.y-_beganTouchLocation.y, 2));
+    
+    //if greater then dead zone radius we do not select cell
+    if(moveDistance > _deadzoneRadius){
+        
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    }
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
+    [_tempCell setSelect:NO];
+    
+    _tempCell = nil;
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
+    [_tempCell setSelect:NO];
+    
+    _tempCell = nil;
 }
 
 #pragma mark - getter
@@ -413,8 +468,10 @@
 }
 
 #pragma mark - internal
+/*
 - (void)onScrollViewTouchDown:(NPTouchDownUp *)touchDown{
     
+    NSLog(@"state %li", touchDown.state);
     if(touchDown.state == UIGestureRecognizerStateBegan){
         
         //give a delay to begin select cell
@@ -450,12 +507,13 @@
         _tempCell = nil;
     }
 }
+ */
 
-- (void)beginSelectCellWithTouch:(NPTouchDownUp *)touchDown{
+- (void)beginSelectCellWithTouch{
     
     _didTouchCell = YES;
     
-    _tempCell = [self findCellByPoint:touchDown.touchDownLocation];
+    _tempCell = [self findCellByPoint:_beganTouchLocation];
     
     [_tempCell setSelect:YES];
 }

@@ -44,4 +44,9 @@
  */
 - (void)addGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer WithDelegate:(id<UIGestureRecognizerDelegate>)delegate;
 
+/**
+ * Same as "requireGestureRecognizerToFail" but use GestureComponent
+ */
+- (void)requireGestureComponentToFail:(GestureComponent *)component;
+
 @end

@@ -56,7 +56,7 @@
     panLRCom.delegate = self;
     [_tableView addGestureComponent:panLRCom];
     
-    //add tap gesture component
+    //add single tap gesture component
     Tap *tap = [[Tap alloc] initWithTableView:_tableView WithPriority:0];
     tap.delegate = self;
     [_tableView addGestureComponent:tap];
@@ -65,6 +65,9 @@
     DoubleTap *doubleTap = [[DoubleTap alloc] initWithTableView:_tableView WithPriority:0];
     doubleTap.delegate = self;
     [_tableView addGestureComponent:doubleTap];
+    
+    //single tap happen when double tap fail
+    [tap requireGestureComponentToFail:doubleTap];
     
 }
 

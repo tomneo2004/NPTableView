@@ -7,7 +7,6 @@
 //
 
 #import "DoubleTap.h"
-#import "Tap.h"
 
 @implementation DoubleTap{
     
@@ -22,6 +21,7 @@
         
         UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onDoubleTap:)];
         [recoginzer setNumberOfTapsRequired:2];
+        [recoginzer setNumberOfTouchesRequired:1];
         [self addGestureRecognizer:recoginzer WithDelegate:self];
     }
     

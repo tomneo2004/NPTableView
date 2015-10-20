@@ -53,6 +53,11 @@
     }
 }
 
+- (void)requireGestureComponentToFail:(GestureComponent *)component{
+    
+    [_gestureRecognizer requireGestureRecognizerToFail:component.gestureRecognizer];
+}
+
 #pragma mark - override
 - (void)dealloc{
     
