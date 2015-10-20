@@ -468,47 +468,6 @@
 }
 
 #pragma mark - internal
-/*
-- (void)onScrollViewTouchDown:(NPTouchDownUp *)touchDown{
-    
-    NSLog(@"state %li", touchDown.state);
-    if(touchDown.state == UIGestureRecognizerStateBegan){
-        
-        //give a delay to begin select cell
-        //during this time if user move finger then it should cancel select cell
-        [self performSelector:@selector(beginSelectCellWithTouch:) withObject:touchDown afterDelay:0.03f];
-    }
-    
-    if(touchDown.state == UIGestureRecognizerStateChanged){
-        
-        if(touchDown.touchChanged){
-            
-            //cancel select cell if user finger moved
-            [NSObject cancelPreviousPerformRequestsWithTarget:self];
-        }
-        
-    }
-    
-    if(touchDown.state == UIGestureRecognizerStateEnded){
-        
-        [NSObject cancelPreviousPerformRequestsWithTarget:self];
-        
-        [_tempCell setSelect:NO];
-        
-        _tempCell = nil;
-    }
-    
-    if(touchDown.state == UIGestureRecognizerStateCancelled){
-        
-        [NSObject cancelPreviousPerformRequestsWithTarget:self];
-        
-        [_tempCell setSelect:NO];
-        
-        _tempCell = nil;
-    }
-}
- */
-
 - (void)beginSelectCellWithTouch{
     
     _didTouchCell = YES;
