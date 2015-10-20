@@ -6,9 +6,9 @@
 //  Copyright © 2015 ArcTech. All rights reserved.
 //
 
-#import "Tap.h"
+#import "SingleTap.h"
 
-@implementation Tap{
+@implementation SingleTap{
     
     NSInteger _tappedCellIndex;
     
@@ -37,9 +37,9 @@
      
         _tappedCellIndex = [_tableView findCellIndexByPoint:[recognizer locationOfTouch:0 inView:_tableView.scrollView]];
         
-        if([self.delegate respondsToSelector:@selector(onTapAtCellIndex:)]){
+        if([self.delegate respondsToSelector:@selector(onSingleTapAtCellIndex:)]){
             
-            [self.delegate onTapAtCellIndex:_tappedCellIndex];
+            [self.delegate onSingleTapAtCellIndex:_tappedCellIndex];
         }
          
     }

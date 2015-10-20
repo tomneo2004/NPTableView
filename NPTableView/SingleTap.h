@@ -8,17 +8,17 @@
 
 #import "GestureComponent.h"
 
-@protocol TapDelegate <NSObject>
+@protocol SingleTapDelegate <NSObject>
 
 @optional
 /**
  * Call when tap on a cell with cell index
  */
-- (void)onTapAtCellIndex:(NSInteger)index;
+- (void)onSingleTapAtCellIndex:(NSInteger)index;
 
 @end
 
-@interface Tap : GestureComponent
+@interface SingleTap : GestureComponent
 
 
 @end

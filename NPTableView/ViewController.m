@@ -57,7 +57,7 @@
     [_tableView addGestureComponent:panLRCom];
     
     //add single tap gesture component
-    Tap *tap = [[Tap alloc] initWithTableView:_tableView WithPriority:0];
+    SingleTap *tap = [[SingleTap alloc] initWithTableView:_tableView WithPriority:0];
     tap.delegate = self;
     [_tableView addGestureComponent:tap];
     
@@ -105,7 +105,7 @@
     }
 }
 
-- (void)onTapAtCellIndex:(NSInteger)index{
+- (void)onSingleTapAtCellIndex:(NSInteger)index{
     
     NSLog(@"Tap on cell at index: %li", index);
 }

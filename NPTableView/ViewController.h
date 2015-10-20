@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "PanLeftRight.h"
-#import "Tap.h"
+#import "SingleTap.h"
 #import "DoubleTap.h"
 #import "ShoppingItem.h"
 #import "NPTableView.h"
 #import "ShoppingItemCell.h"
 
-@interface ViewController : UIViewController<NPTableViewDataSource, PanLeftRightDelegate, TapDelegate, DoubleTapDelegate>
+@interface ViewController : UIViewController<NPTableViewDataSource, PanLeftRightDelegate, SingleTapDelegate, DoubleTapDelegate>
 
 
 @end

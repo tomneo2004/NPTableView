@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE07C9A21BD48AFC001CEC43 /* Tap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07C9A11BD48AFC001CEC43 /* Tap.m */; settings = {ASSET_TAGS = (); }; };
+		CE07C9A21BD48AFC001CEC43 /* SingleTap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07C9A11BD48AFC001CEC43 /* SingleTap.m */; settings = {ASSET_TAGS = (); }; };
 		CE07C9AA1BD4E8E4001CEC43 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE07C9A91BD4E8E4001CEC43 /* QuartzCore.framework */; };
 		CE07C9AD1BD4EF38001CEC43 /* DoubleTap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07C9AC1BD4EF38001CEC43 /* DoubleTap.m */; settings = {ASSET_TAGS = (); }; };
 		CE6BDCD21BCCA9D4009183E8 /* ShoppingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6BDCD11BCCA9D4009183E8 /* ShoppingItem.m */; settings = {ASSET_TAGS = (); }; };
@@ -48,8 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CE07C9A01BD48AFC001CEC43 /* Tap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tap.h; sourceTree = "<group>"; };
-		CE07C9A11BD48AFC001CEC43 /* Tap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tap.m; sourceTree = "<group>"; };
+		CE07C9A01BD48AFC001CEC43 /* SingleTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTap.h; sourceTree = "<group>"; };
+		CE07C9A11BD48AFC001CEC43 /* SingleTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTap.m; sourceTree = "<group>"; };
 		CE07C9A91BD4E8E4001CEC43 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE07C9AB1BD4EF38001CEC43 /* DoubleTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleTap.h; sourceTree = "<group>"; };
 		CE07C9AC1BD4EF38001CEC43 /* DoubleTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleTap.m; sourceTree = "<group>"; };
@@ -200,6 +200,42 @@
 			name = NPTabelView;
 			sourceTree = "<group>";
 		};
+		CEBAB5021BD5F24800B6F589 /* PanLeftRight */ = {
+			isa = PBXGroup;
+			children = (
+				CEC1817D1BD0A01700768AC9 /* PanLeftRight.h */,
+				CEC1817E1BD0A01700768AC9 /* PanLeftRight.m */,
+			);
+			name = PanLeftRight;
+			sourceTree = "<group>";
+		};
+		CEBAB5031BD5F25E00B6F589 /* PullDownAddNew */ = {
+			isa = PBXGroup;
+			children = (
+				CEC181801BD1014D00768AC9 /* PullDownAddNew.h */,
+				CEC181811BD1014D00768AC9 /* PullDownAddNew.m */,
+			);
+			name = PullDownAddNew;
+			sourceTree = "<group>";
+		};
+		CEBAB5041BD5F26E00B6F589 /* SingleTap */ = {
+			isa = PBXGroup;
+			children = (
+				CE07C9A01BD48AFC001CEC43 /* SingleTap.h */,
+				CE07C9A11BD48AFC001CEC43 /* SingleTap.m */,
+			);
+			name = SingleTap;
+			sourceTree = "<group>";
+		};
+		CEBAB5051BD5F27C00B6F589 /* DoubleTap */ = {
+			isa = PBXGroup;
+			children = (
+				CE07C9AB1BD4EF38001CEC43 /* DoubleTap.h */,
+				CE07C9AC1BD4EF38001CEC43 /* DoubleTap.m */,
+			);
+			name = DoubleTap;
+			sourceTree = "<group>";
+		};
 		CEC181651BD08C8A00768AC9 /* GestureComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,14 +248,10 @@
 		CEC1817C1BD09FEA00768AC9 /* Gestures */ = {
 			isa = PBXGroup;
 			children = (
-				CEC1817D1BD0A01700768AC9 /* PanLeftRight.h */,
-				CEC1817E1BD0A01700768AC9 /* PanLeftRight.m */,
-				CEC181801BD1014D00768AC9 /* PullDownAddNew.h */,
-				CEC181811BD1014D00768AC9 /* PullDownAddNew.m */,
-				CE07C9A01BD48AFC001CEC43 /* Tap.h */,
-				CE07C9A11BD48AFC001CEC43 /* Tap.m */,
-				CE07C9AB1BD4EF38001CEC43 /* DoubleTap.h */,
-				CE07C9AC1BD4EF38001CEC43 /* DoubleTap.m */,
+				CEBAB5051BD5F27C00B6F589 /* DoubleTap */,
+				CEBAB5041BD5F26E00B6F589 /* SingleTap */,
+				CEBAB5031BD5F25E00B6F589 /* PullDownAddNew */,
+				CEBAB5021BD5F24800B6F589 /* PanLeftRight */,
 			);
 			name = Gestures;
 			sourceTree = "<group>";
@@ -357,7 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE07C9A21BD48AFC001CEC43 /* Tap.m in Sources */,
+				CE07C9A21BD48AFC001CEC43 /* SingleTap.m in Sources */,
 				CE7CCF291BCB905E002A0A50 /* ViewController.m in Sources */,
 				CEBAB5011BD5E7F500B6F589 /* NPScrollView.m in Sources */,
 				CE7CCF571BCB90AF002A0A50 /* NPTableView.m in Sources */,
