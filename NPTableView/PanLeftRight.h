@@ -36,6 +36,13 @@
 
 @end
 
+enum PanLeftRightDirection{
+    
+    PanLeft,
+    PanRight,
+    PanBothLeftRight
+};
+
 @interface PanLeftRight : GestureComponent
 
 /**
@@ -51,5 +58,11 @@
  * Default NO
  */
 @property (assign, nonatomic) BOOL panRightSnapBackAnim;
+
+/**
+ * Which directions are allowed
+ * PanLeft, PanRight, PanBothLeftRight
+ */
+@property (assign, nonatomic) enum PanLeftRightDirection allowedDirection;
 
 @end

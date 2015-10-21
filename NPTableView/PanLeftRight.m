@@ -28,6 +28,7 @@
 
 @synthesize panLeftSnapBackAnim = _panLeftSnapBackAnim;
 @synthesize panRightSnapBackAnim = _panRightSnapBackAnim;
+@synthesize allowedDirection = _allowedDirection;
 
 #pragma mark - ovrride
 - (id)initWithTableView:(NPTableView *)tableView WithPriority:(NSInteger)priority{
@@ -36,6 +37,7 @@
         
         _panLeftSnapBackAnim = NO;
         _panRightSnapBackAnim = NO;
+        _allowedDirection = PanBothLeftRight;
         
         UIGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
         [self addGestureRecognizer:recognizer WithDelegate:self];
@@ -76,6 +78,43 @@
         
         //get translation in cell
         CGPoint translate = [recognizer translationInView:_tempCell];
+        
+        BOOL allowGesture = NO;
+        
+        //check direction
+        if(_allowedDirection == PanLeft){
+            
+            if(translate.x > 0.0f){
+                
+                allowGesture = NO;
+            }
+            else{
+                
+                allowGesture = YES;
+            }
+        }
+        else if(_allowedDirection == PanRight){
+            
+            if(translate.x < 0.0f){
+                
+                allowGesture = NO;
+            }
+            else{
+                
+                allowGesture = YES;
+            }
+        }
+        else{
+            
+            allowGesture = YES;
+        }
+        
+        if(!allowGesture){
+            
+            _tempCell.center = _cellOriginalCenter;
+            
+            return;
+        }
         
         //move cell
         _tempCell.center = CGPointMake(_cellOriginalCenter.x + translate.x, _cellOriginalCenter.y);
