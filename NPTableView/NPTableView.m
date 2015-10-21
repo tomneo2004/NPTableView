@@ -233,6 +233,7 @@
         
         [NSObject cancelPreviousPerformRequestsWithTarget:self];
     }
+
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

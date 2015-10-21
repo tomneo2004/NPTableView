@@ -19,6 +19,27 @@
 
 @synthesize selectBackgroundView = _selectBackgroundView;
 
++ (id)cellWithNibName:(NSString *)nibName{
+    
+    if([[NSBundle mainBundle] pathForResource:nibName ofType:@"nib"]){
+        
+        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
+        
+        if(nibContents == nil || nibContents.count == 0){
+            
+            NSLog(@"Init class %@ fail, no nib file found in main bundle", NSStringFromClass([self class]));
+            
+            return nil;
+        }
+        
+        UIView *nibView = [nibContents objectAtIndex:0];
+
+        return nibView;
+    }
+    
+    return nil;
+}
+
 - (id)initWithNibName:(NSString *)nibName{
     
     self = [super initWithFrame:CGRectNull];
@@ -53,6 +74,7 @@
             [self insertSubview:_selectedBackgroundView atIndex:0];
             
             [self beginHighlight:selected];
+            
         }
         else{
             
@@ -74,6 +96,7 @@
 }
 
 - (void)beginHighlight:(BOOL)highlighted{
+    
     
     if(highlighted){
         

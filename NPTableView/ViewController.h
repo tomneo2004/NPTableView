@@ -10,12 +10,13 @@
 #import "PanLeftRight.h"
 #import "SingleTap.h"
 #import "DoubleTap.h"
+#import "LongPress.h"
 #import "PullDownAddNew.h"
 #import "ShoppingItem.h"
 #import "NPTableView.h"
 #import "ShoppingItemCell.h"
 
-@interface ViewController : UIViewController<NPTableViewDataSource, PanLeftRightDelegate, SingleTapDelegate, DoubleTapDelegate, PullDownAddNewDelegate>
+@interface ViewController : UIViewController<NPTableViewDataSource, PanLeftRightDelegate, SingleTapDelegate, DoubleTapDelegate, PullDownAddNewDelegate, LongPressDelegate>
 
 
 @end

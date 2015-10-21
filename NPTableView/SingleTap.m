@@ -21,9 +21,9 @@
     if(self = [super initWithTableView:tableView WithPriority:priority]){
         
         
-        UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-        [recoginzer setNumberOfTapsRequired:1];
-        [self addGestureRecognizer:recoginzer WithDelegate:self];
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+        [recognizer setNumberOfTapsRequired:1];
+        [self addGestureRecognizer:recognizer WithDelegate:self];
     }
     
     return self;

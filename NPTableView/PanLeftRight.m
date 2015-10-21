@@ -37,8 +37,8 @@
         _panLeftSnapBackAnim = NO;
         _panRightSnapBackAnim = NO;
         
-        UIGestureRecognizer *recoginzer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
-        [self addGestureRecognizer:recoginzer WithDelegate:self];
+        UIGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
+        [self addGestureRecognizer:recognizer WithDelegate:self];
     }
     
     return self;

@@ -27,6 +27,7 @@
 		CEBAB5011BD5E7F500B6F589 /* NPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBAB5001BD5E7F500B6F589 /* NPScrollView.m */; settings = {ASSET_TAGS = (); }; };
 		CEBAB5081BD5F3AC00B6F589 /* PDANCellHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBAB5071BD5F3AC00B6F589 /* PDANCellHolder.m */; settings = {ASSET_TAGS = (); }; };
 		CEBAB50A1BD5F3D000B6F589 /* PDANCellHolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB5091BD5F3D000B6F589 /* PDANCellHolder.xib */; settings = {ASSET_TAGS = (); }; };
+		CEC111F41BD72B3D00D78525 /* LongPress.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC111F31BD72B3D00D78525 /* LongPress.m */; settings = {ASSET_TAGS = (); }; };
 		CEC181691BD08CC600768AC9 /* GestureComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC181681BD08CC600768AC9 /* GestureComponent.m */; settings = {ASSET_TAGS = (); }; };
 		CEC1817F1BD0A01700768AC9 /* PanLeftRight.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC1817E1BD0A01700768AC9 /* PanLeftRight.m */; settings = {ASSET_TAGS = (); }; };
 		CEC181821BD1014D00768AC9 /* PullDownAddNew.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC181811BD1014D00768AC9 /* PullDownAddNew.m */; settings = {ASSET_TAGS = (); }; };
@@ -86,6 +87,8 @@
 		CEBAB5061BD5F3AC00B6F589 /* PDANCellHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDANCellHolder.h; sourceTree = "<group>"; };
 		CEBAB5071BD5F3AC00B6F589 /* PDANCellHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDANCellHolder.m; sourceTree = "<group>"; };
 		CEBAB5091BD5F3D000B6F589 /* PDANCellHolder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDANCellHolder.xib; sourceTree = "<group>"; };
+		CEC111F21BD72B3D00D78525 /* LongPress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongPress.h; sourceTree = "<group>"; };
+		CEC111F31BD72B3D00D78525 /* LongPress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongPress.m; sourceTree = "<group>"; };
 		CEC181671BD08CC600768AC9 /* GestureComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureComponent.h; sourceTree = "<group>"; };
 		CEC181681BD08CC600768AC9 /* GestureComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureComponent.m; sourceTree = "<group>"; };
 		CEC1817D1BD0A01700768AC9 /* PanLeftRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanLeftRight.h; sourceTree = "<group>"; };
@@ -244,6 +247,15 @@
 			name = DoubleTap;
 			sourceTree = "<group>";
 		};
+		CEC111F11BD72B1E00D78525 /* LongPress */ = {
+			isa = PBXGroup;
+			children = (
+				CEC111F21BD72B3D00D78525 /* LongPress.h */,
+				CEC111F31BD72B3D00D78525 /* LongPress.m */,
+			);
+			name = LongPress;
+			sourceTree = "<group>";
+		};
 		CEC181651BD08C8A00768AC9 /* GestureComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +268,7 @@
 		CEC1817C1BD09FEA00768AC9 /* Gestures */ = {
 			isa = PBXGroup;
 			children = (
+				CEC111F11BD72B1E00D78525 /* LongPress */,
 				CEBAB5051BD5F27C00B6F589 /* DoubleTap */,
 				CEBAB5041BD5F26E00B6F589 /* SingleTap */,
 				CEBAB5031BD5F25E00B6F589 /* PullDownAddNew */,
@@ -410,6 +423,7 @@
 				CE6BDCD21BCCA9D4009183E8 /* ShoppingItem.m in Sources */,
 				CE7CCF5E1BCB9787002A0A50 /* NPTableCellView.m in Sources */,
 				CEC181691BD08CC600768AC9 /* GestureComponent.m in Sources */,
+				CEC111F41BD72B3D00D78525 /* LongPress.m in Sources */,
 				CEBAB5081BD5F3AC00B6F589 /* PDANCellHolder.m in Sources */,
 				CEC1817F1BD0A01700768AC9 /* PanLeftRight.m in Sources */,
 			);

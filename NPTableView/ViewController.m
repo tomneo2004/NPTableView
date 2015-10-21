@@ -75,6 +75,11 @@
     //single tap happen when double tap fail
     [tap requireGestureComponentToFail:doubleTap];
     
+    //add long press
+    LongPress * longPress = [[LongPress alloc] initWithTableView:_tableView WithPriority:0];
+    longPress.delegate = self;
+    [_tableView addGestureComponent:longPress];
+    
     //add pull down add new
     PullDownAddNew *pDAN = [[PullDownAddNew alloc] initWithTableView:_tableView WithPriority:0];
     pDAN.delegate = self;
@@ -131,6 +136,7 @@
     
     BOOL startAnimating  = NO;
     
+    //shuffle cell up
     for(ShoppingItemCell *cell in visibleCells){
         
         if (startAnimating) {
@@ -180,6 +186,12 @@
     NSLog(@"Double tap on cell at index: %li", (long)index);
 }
 
+#pragma mark - LongPress delegate
+- (void)onLongPressAtCellIndex:(NSInteger)index{
+    
+    NSLog(@"Long press on cell at index: %li", (long)index);
+}
+
 #pragma mark - PullDownAddNew delegate
 - (void)addNewItemWithText:(NSString *)text{
     
@@ -202,7 +214,8 @@
     
     if(cell == nil){
         
-        cell = [[ShoppingItemCell alloc] initWithNibName:@"ShoppingItemCell"];
+        cell = [ShoppingItemCell cellWithNibName:@"ShoppingItemCell"];
+        //cell = [[ShoppingItemCell alloc] initWithNibName:@"ShoppingItemCell"];
         
         //give a select background
         UIView *bgView = [[UIView alloc] init];
@@ -226,6 +239,7 @@
     return [ShoppingItemCell class];
 }
 
+//uncomment to use code to define cell height
 /*
 - (CGFloat)cellHeight{
     

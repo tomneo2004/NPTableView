@@ -22,6 +22,13 @@
  * You can first create and design cell in xib file.
  * Then you can use this method and give xib file name to create cell
  */
++ (id)cellWithNibName:(NSString *)nibName;
+
+/**
+ * Create a cell
+ * You can first create and design cell in xib file.
+ * Then you can use this method and give xib file name to create cell
+ */
 - (id)initWithNibName:(NSString *)nibName;
 
 /**
