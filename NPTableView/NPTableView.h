@@ -36,6 +36,11 @@
 
 @optional
 /**
+ * Call when a cell about to display
+ */
+- (void)onDisplayCell:(NPTableCellView *)cell AtIndex:(NSInteger)index;
+
+/**
  * Height of cell, if not override then layout cell height of xib file will be default
  * If you override and return height value then your value will be used instead of
  * default height

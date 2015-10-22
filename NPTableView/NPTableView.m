@@ -570,6 +570,11 @@
             
             cell.hidden = NO;
             
+            if([_dataSourceDelegate respondsToSelector:@selector(onDisplayCell:AtIndex:)]){
+                
+                [_dataSourceDelegate onDisplayCell:cell AtIndex:row];
+            }
+            
             //add to scrollView
             [_scrollView insertSubview:cell atIndex:0];
             

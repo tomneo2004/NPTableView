@@ -93,6 +93,8 @@
     
     ShoppingItemCell *cell = (ShoppingItemCell *)[_tableView findCellInVisibleCellsByIndex:index];
     
+    [cell.deleteLabel setHidden:NO];
+    
     cell.deleteLabel.alpha = delta;
     
     if(delta >= 1){
@@ -109,6 +111,8 @@
 - (void)onPanningRightWithDelta:(CGFloat)delta AtCellIndex:(NSInteger)index{
     
     ShoppingItemCell *cell = (ShoppingItemCell *)[_tableView findCellInVisibleCellsByIndex:index];
+    
+    [cell.completeLabel setHidden:NO];
     
     cell.completeLabel.alpha = delta;
     
@@ -237,6 +241,24 @@
 - (Class)cellClass{
     
     return [ShoppingItemCell class];
+}
+
+- (void)onDisplayCell:(NPTableCellView *)cell AtIndex:(NSInteger)index{
+    
+    CGRect rect = cell.frame;
+    
+    ShoppingItemCell *shoppingCell = (ShoppingItemCell *)cell;
+    
+    [shoppingCell.completeLabel setHidden:YES];
+    [shoppingCell.deleteLabel setHidden:YES];
+    
+    cell.frame = CGRectMake(-cell.frame.size.width, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height);
+    
+    [UIView animateWithDuration:0.5f animations:^{
+    
+        cell.frame = rect;
+        
+    } completion:nil];
 }
 
 //uncomment to use code to define cell height
